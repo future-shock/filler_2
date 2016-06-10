@@ -27,23 +27,30 @@
 # define P1		O
 # define P2		X
 
-typedef struct	s_data
+typedef struct	s_player
 {
 	char		pl_sign;
 	int			pl_num;
-
-
 	int			x;
-	int			y;		
-	
+	int			y;	
+}				t_player;
+
+typedef struct	s_battle_field
+{
 	int			width;
 	int			len;
-	void		**data;
-	
+	void		**bf_content;
+}				t_bfield;
+
+typedef struct	s_data
+{
+	t_bfield	bfield;
+	t_player	pl_one;
+	t_player	pl_two;	
 }				t_data;
 
 int				get_next_line(const int fd, char **line);
 void			load_data(int from, int to);
-int 			get_player(char *line);
+int 			get_player(char *line, t_data *data);
 
 #endif

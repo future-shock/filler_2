@@ -28,27 +28,25 @@ static int	find_player(char const *big, char const *little)
 			i++;
 			j++;
 		}
-		i = i - j;
+		i = i - j; //This might just be redudant.
 		i++;
 	}
 	return (-1);
 }
 	
-int get_player(char *line)
+int get_player(char *line, t_data *data)
 {
-	t_data	player;
-
 	if (find_player(line, "p1") > 0)
 	{
-		player.pl_num = 1;
-		player.pl_sign = 'O';
-			return (1);
+		data->pl_one.pl_num = 1;
+		data->pl_one.pl_sign = 'O';
+		return (1);
 	}
 	if (find_player(line, "p2") > 0)
 	{
-		player.pl_num = 2;
-		player.pl_sign = 'X';
-			return (1);
+		data->pl_two.pl_num = 2;
+		data->pl_two.pl_sign = 'X';
+		return (1);
 	}
 	return (0);
 }
