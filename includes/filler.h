@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 14:20:30 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/06/11 16:33:04 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/06/11 18:47:18 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct	s_battle_field
 {
 	int			width;
 	int			height;
-	void		**bf_content;
+	char		**bf_content;
 }				t_bfield;
 
 typedef struct s_piece

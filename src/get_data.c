@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/11 12:26:29 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/06/11 16:32:43 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/06/11 18:47:15 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,32 @@
 static int		get_bf_content(t_data *data, char *line)
 {
 	static int		i;
-	static int		j;
 
+	if (data->bfield.bf_content == NULL)
+		data->bfield.bf_content = (char **)malloc(sizeof(char *) 
+				* data->bfield.height + 1);
+	while (((*line >= '0') && (*line <= '9')) || (*line == ' '))
+		line++;
+		//Capture player chars here.
+		data->bfield.bf_content[i] = ft_strdup(line);
+		line = line + ft_strlen(line - 4);
+		printf("string: %s\n", data->bfield.bf_content[i]);
+	i++;
 
-	while (*(line + 3 + i) != '\0')
-	{
-		j = 0;
-		while (*(line + 3 + j) != '\n')
-		{
-			(*(char **)data->bfield.bf_content)[j] = *(line + 3 + j);
-			j++;
-		}
-		i++;
-	}
+	//printf("string: %s\n", data->bfield.bf_content[i]);
 	return (0);
 }
 
 static int		start_of_bf_content(char *s)
 {
-	return (ft_isdigit(*s) && ft_isdigit(*(s + 1) && ft_isdigit(*(s + 2))));
+	if (ft_isdigit(*s) && ft_isdigit(*(s + 1)) && ft_isdigit(*(s + 2)) 
+				&& (*(s + 3) == ' '))
+	{
+		return (1);
+	}
+	else
+		return (0);
 }
-
-
 
 static int		get_stream(int from, int to)
 {
@@ -46,23 +50,22 @@ static int		get_stream(int from, int to)
 	static int		mapinfo_true;
 	static int		pieceinfo_true;
 	t_data			data;
-	
+
 	line = NULL;
-	i = 0;
+	i = -1;
 	while (get_next_line(from, &line) == 1 && *line != '<')
 	{
 		i++;
 		if (!player_true)
 			player_true = get_player(line, &data);
 		if (!mapinfo_true)
-			mapinfo_true = get_mapinfo(line, &data);;
+			mapinfo_true = get_mapinfo(line, &data);
 		if (!pieceinfo_true)
 			pieceinfo_true = get_pieceinfo(line, &data);
-
 		if (start_of_bf_content(line))
 		{	
 			get_bf_content(&data, line);
-			printf("This is the content: %s", *((char **)data.bfield.bf_content));
+			printf("This is the content: %s\n", data.bfield.bf_content[i]);
 		}
 		write(to, line, ft_strlen(line));
 		write(to, "\n", 1);
