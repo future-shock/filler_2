@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 14:20:30 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/06/11 17:03:07 by simzam           ###   ########.fr       */
+/*   Updated: 2016/06/11 16:33:04 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# define P1		O
-# define P2		X
-
 typedef struct	s_player
 {
 	char		pl_sign;
@@ -38,9 +35,16 @@ typedef struct	s_player
 typedef struct	s_battle_field
 {
 	int			width;
-	int			len;
+	int			height;
 	void		**bf_content;
 }				t_bfield;
+
+typedef struct s_piece
+{
+	int			width;
+	int			height;
+}				t_piece;
+
 
 typedef struct	s_data
 {
@@ -50,6 +54,9 @@ typedef struct	s_data
 	t_player	pl_two;	
 }				t_data;
 
+
+int				get_pieceinfo(char *line, t_data *data);
+int				get_mapinfo(char *line, t_data *data);
 int				get_next_line(const int fd, char **line);
 void			load_data(int from, int to);
 int 			get_player(char *line, t_data *data);

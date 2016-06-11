@@ -6,7 +6,7 @@
 #    By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/05/25 11:55:33 by arnovan-          #+#    #+#              #
-#    Updated: 2016/06/09 17:16:30 by arnovan-         ###   ########.fr        #
+#    Updated: 2016/06/11 16:37:35 by arnovan-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,9 +26,10 @@ PATH_SRC= ./src/
 
 PATH_HD= -I includes/
 
-SRC = $(PATH_SRC)get_data.c $(PATH_SRC)get_player.c
+SRC = $(PATH_SRC)get_data.c $(PATH_SRC)get_player.c $(PATH_SRC)get_mapinfo.c\
+	  $(PATH_SRC)get_pieceinfo.c
 
-OBJ = get_data.o get_player.o
+OBJ = get_data.o get_player.o get_mapinfo.o get_pieceinfo.o
 
 $(NAME):
 	@echo "Compiling binaries..."

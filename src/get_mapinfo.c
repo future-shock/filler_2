@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_player.c                                       :+:      :+:    :+:   */
+/*   get_mapinfo.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/06/09 12:21:31 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/06/11 14:56:28 by arnovan-         ###   ########.fr       */
+/*   Created: 2016/06/11 14:54:28 by arnovan-          #+#    #+#             */
+/*   Updated: 2016/06/11 16:25:45 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
-	
-static int	find_player(char const *big, char const *little)
+
+static int	find_plateau(char const *big, char const *little)
 {
 	int	i;
 	int	j;
@@ -34,20 +34,24 @@ static int	find_player(char const *big, char const *little)
 
 }
 
-int get_player(char *line, t_data *data)
-{
-	if (find_player(line, "p1") > 0)
+int get_mapinfo(char *line, t_data *data)
+{	
+	if (find_plateau(line, "Plateau ") > 0)
 	{
-		data->pl_one.pl_num = 1;
-		data->pl_one.pl_sign = 'O';
-		return (1);
-	}
-
-	if (find_player(line, "p2") > 0)
-	{
-		data->pl_two.pl_num = 2;
-		data->pl_two.pl_sign = 'X';
-		return (1);
+		data->bfield.height = 0;
+		data->bfield.width = 0;
+		while (*line)
+		{
+			if (*line >= '0' && *line <= '9')
+			{
+				if (data->bfield.height == 0)
+					data->bfield.height = ft_atoi(line);
+				else
+					data->bfield.width = ft_atoi(line);
+				line++;
+			}
+			line++;
+		}
 	}
 	return (0);
 }

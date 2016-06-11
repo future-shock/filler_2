@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/11 12:26:29 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/06/11 12:44:05 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/06/11 16:32:43 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,15 @@ static int		start_of_bf_content(char *s)
 	return (ft_isdigit(*s) && ft_isdigit(*(s + 1) && ft_isdigit(*(s + 2))));
 }
 
+
+
 static int		get_stream(int from, int to)
 {
 	char			*line;
 	int				i;
 	static int		player_true;
+	static int		mapinfo_true;
+	static int		pieceinfo_true;
 	t_data			data;
 	
 	line = NULL;
@@ -48,14 +52,15 @@ static int		get_stream(int from, int to)
 	while (get_next_line(from, &line) == 1 && *line != '<')
 	{
 		i++;
-//		if (!player_true)
-		{
-			data.bfield.len = ft_strlen(line);
+		if (!player_true)
 			player_true = get_player(line, &data);
-		}
-		printf("This is the player: %s\n", line);
+		if (!mapinfo_true)
+			mapinfo_true = get_mapinfo(line, &data);;
+		if (!pieceinfo_true)
+			pieceinfo_true = get_pieceinfo(line, &data);
+
 		if (start_of_bf_content(line))
-		{
+		{	
 			get_bf_content(&data, line);
 			printf("This is the content: %s", *((char **)data.bfield.bf_content));
 		}

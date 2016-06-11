@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_player.c                                       :+:      :+:    :+:   */
+/*   get_pieceinfo.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/06/09 12:21:31 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/06/11 14:56:28 by arnovan-         ###   ########.fr       */
+/*   Created: 2016/06/11 16:26:14 by arnovan-          #+#    #+#             */
+/*   Updated: 2016/06/11 16:37:29 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
-	
-static int	find_player(char const *big, char const *little)
+
+static int	find_piece(char const *big, char const *little)
 {
 	int	i;
 	int	j;
@@ -34,19 +34,24 @@ static int	find_player(char const *big, char const *little)
 
 }
 
-int get_player(char *line, t_data *data)
-{
-	if (find_player(line, "p1") > 0)
+int get_pieceinfo(char *line, t_data *data)
+{	
+	if (find_piece(line, "Piece ") > 0)
 	{
-		data->pl_one.pl_num = 1;
-		data->pl_one.pl_sign = 'O';
-		return (1);
-	}
-
-	if (find_player(line, "p2") > 0)
-	{
-		data->pl_two.pl_num = 2;
-		data->pl_two.pl_sign = 'X';
+		data->piece.height = 0;
+		data->piece.width = 0;
+		while (*line)
+		{
+			if (*line >= '0' && *line <= '9')
+			{
+				if (data->piece.height == 0)
+					data->piece.height = ft_atoi(line);
+				else
+					data->piece.width = ft_atoi(line);
+				line++;
+			}
+			line++;
+		}
 		return (1);
 	}
 	return (0);
