@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_data.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: simzam   <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/06/07 08:20:08 by simzam            #+#    #+#             */
-/*   Updated: 2016/06/09 18:18:43 by arnovan-         ###   ########.fr       */
+/*   Created: 2016/06/11 12:26:29 by arnovan-          #+#    #+#             */
+/*   Updated: 2016/06/11 12:44:05 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int		get_stream(int from, int to)
 	while (get_next_line(from, &line) == 1 && *line != '<')
 	{
 		i++;
-		if (!player_true)
+//		if (!player_true)
 		{
 			data.bfield.len = ft_strlen(line);
 			player_true = get_player(line, &data);
