@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 14:20:30 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/06/11 12:51:22 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/06/11 17:03:07 by simzam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct	s_battle_field
 typedef struct	s_data
 {
 	t_bfield	bfield;
+	t_bfield	bpiece;
 	t_player	pl_one;
 	t_player	pl_two;	
 }				t_data;
